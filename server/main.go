@@ -28,6 +28,7 @@ func handleConnection(conn net.Conn) {
 func main() {
 	fmt.Println("Welcome to UPPER server....waiting for a connection")
 	listener, err := net.Listen("tcp", ":8080")
+	defer listener.Close()
 	if err != nil {
 		log.Fatal(err)
 	}
