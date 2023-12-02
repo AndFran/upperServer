@@ -14,11 +14,13 @@ func handleConnection(conn net.Conn) {
 		clientReader := bufio.NewReader(conn) // read from client
 		clientText, err := clientReader.ReadString('\n')
 		if err != nil {
-			log.Fatal(err)
+			log.Println(err)
+			break
 		}
-		_, err = conn.Write([]byte(strings.ToUpper(clientText) + "\n"))
+		_, err = fmt.Fprintln(conn, strings.ToUpper(clientText)+"\n")
 		if err != nil {
-			log.Fatal(err)
+			log.Println(err)
+			break
 		}
 	}
 }
